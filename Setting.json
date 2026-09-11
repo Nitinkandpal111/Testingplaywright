@@ -1,0 +1,13 @@
+{
+  "cucumber.glue": [
+    "step-definitions/**/*.js",
+    "setup/**/*.js",
+    "config/**/*.js"
+  ],
+  "cucumber.features": [
+    "features/**/*.feature"
+  ],
+  "yaml.schemas": {
+    "https://www.artillery.io/schema.json": []
+  }
+}

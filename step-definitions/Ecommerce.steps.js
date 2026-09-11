@@ -1,7 +1,7 @@
 const { Given, When, Then, And } = require("@cucumber/cucumber");
 const {
   EcommercePage,
-} = require("../../page/BStack Ecom Page/EcommercePage.js");
+} = require("../page/BStack Ecom Page/EcommercePage.js");
 
 const ecomPage = new EcommercePage();
 

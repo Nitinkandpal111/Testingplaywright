@@ -1,0 +1,26 @@
+{
+  "planHash": "042ac21bb4f1ad83f5264582289a9a6b2700e46cddfe2fc6c23be884c5e977a6",
+  "phase": "baseline",
+  "recordedAtUtc": "2026-08-31T06:38:59.6875715Z",
+  "retryCount": 0,
+  "resetBaseline": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": false,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 1,
+        "outputSample": "\r\n\u003E playwright-bdd-test@1.0.0 test\r\n\u003E cucumber-js --require cucumber.js --require step-definitions/**/*.js --require features/**/*.js --require setup/**/*.js --format html:./reports/cucumber_report.html --format json:./reports/cucumber_report.json --format summary --format @cucumber/pretty-formatter --retry 0 --tags @smoke\r\n\r\nnode:internal/modules/cjs/loader:1404\r\n  throw err;\r\n  ^\r\n\r\nError: Cannot find module \u0027@cucumber/messages\u0027\r\nRequire stack:\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\gherkin-streams\\dist\\src\\makeGherkinOptions.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\gherkin-streams\\dist\\src\\GherkinStreams.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\gherkin-streams\\dist\\src\\index.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\cucumber\\lib\\api\\gherkin.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\cucumber\\lib\\api\\load_sources.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\cucumber\\lib\\api\\index.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\cucumber\\lib\\cli\\index.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\cucumber\\lib\\cli\\run.js\r\n- d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\cucumber\\bin\\cucumber.js\r\n    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)\r\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)\r\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)\r\n    at Function._load (node:internal/modules/cjs/loader:1211:37)\r\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\r\n    at Module.require (node:internal/modules/cjs/loader:1487:12)\r\n    at require (node:internal/modules/helpers:135:16)\r\n    at Object.\u003Canonymous\u003E (d:\\Playwrightudittest\\playwrightTest\\node_modules\\@cucumber\\gherkin-streams\\dist\\src\\makeGherkinOptions.js:3:20)\r\n    at Module._compile (node:internal/modules/cjs/loader:1730:14) {\r\n  code: \u0027MODULE_NOT_FOUND\u0027,\r\n  requireStack: [\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\gherkin-streams\\\\dist\\\\src\\\\makeGherkinOptions.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\gherkin-streams\\\\dist\\\\src\\\\GherkinStreams.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\gherkin-streams\\\\dist\\\\src\\\\index.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\cucumber\\\\lib\\\\api\\\\gherkin.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\cucumber\\\\lib\\\\api\\\\load_sources.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\cucumber\\\\lib\\\\api\\\\index.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\cucumber\\\\lib\\\\cli\\\\index.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\cucumber\\\\lib\\\\cli\\\\run.js\u0027,\r\n    \u0027d:\\\\Playwrightudittest\\\\playwrightTest\\\\node_modules\\\\@cucumber\\\\cucumber\\\\bin\\\\cucumber.js\u0027\r\n  ]\r\n}\r\n\r\nNode.js v22.17.1\r\n",
+        "durationMs": 5725
+      }
+    ]
+  }
+}

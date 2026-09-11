@@ -34,7 +34,7 @@ class LoginPage {
     };
   }
 
-  /* This function is takinng the user to the login and entering all the deatils for the login purposee */
+  /* This function is taking the user to the login and entering all the deatils for the login purposee */
   async navigateToLoginScreen(username, password) {
     await page.goto(global.BASE_URL);
 
@@ -150,8 +150,9 @@ class LoginPage {
   async fillRandomUsernameAndPassword() {
     try {
       const randomString = Math.random().toString(36).substring(2, 9);
+      const numericPart = Math.floor(100 + Math.random() * 900);
       const username = `user_${randomString}`;
-      const password = `Pass_${randomString}`;
+      const password = `Pass_${randomString}${numericPart}`;
 
       global.generatedUsername = username;
       global.generatedPassword = password;
@@ -316,7 +317,7 @@ class LoginPage {
     }
   }
 
-  /* This functio lets the user logut the application*/
+  /* This function lets the user logout the application*/
   async logout() {
     try {
       await page.waitForSelector(this.locators.userDropdownIcon, {

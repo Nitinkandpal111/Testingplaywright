@@ -1,7 +1,7 @@
 const common = `--require config/config.js 
 --require setup/assertions.js 
 --require setup/hooks.js 
---require step-definitions/**/*.steps.js`;
+--require step-definitions/**/*.js`;
 
 const { chromium, firefox, webkit } = require('playwright');
 require('dotenv').config();

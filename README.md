@@ -1,6 +1,7 @@
 # Automation Framework – OrangeHRM & BStackDemo Ecommerce
 
 ## Overview
+
 This project is an end-to-end automation framework built with:
 Playwright – Browser automation
 Cucumber.js – BDD framework for writing feature files
@@ -23,8 +24,8 @@ BStackDemo – E-commerce website
 ┃ ┣ 📜 LoginPage.js
 ┃ ┣ 📜 EcommercePage.js
 ┣ 📂 setup
-┃ ┗ 📜 assertions.js 
-  ┗ 📜 hooks.js
+┃ ┗ 📜 assertions.js
+┗ 📜 hooks.js
 ┣ 📂 reports
 ┃ ┣ 📜 test-report.html
 ┃ ┗ 📜 screenshots & videos
@@ -47,7 +48,7 @@ setup/ → Configurations
 
 Clone the Repository
 
--git clone https://github.com/testorgqa-cpu/Playwright.git
+-git clone https://github.com/testorgqa-cpu/Playwright
 -Install Dependencies
 npm install
 -Install Playwright Browsers

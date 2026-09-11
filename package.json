@@ -4,7 +4,7 @@
   "description": "Playwright + Cucumber.js BDD framework",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js --require cucumber.js --require step-definitions/**/*.js --require features/**/*.js --require setup/**/*.js --format html:./reports/cucumber_report.html --format json:./reports/cucumber_report.json --format summary --format @cucumber/pretty-formatter --retry 0"
+    "test": "cucumber-js --require config/config.js --require setup/assertions.js --require setup/hooks.js --require step-definitions/**/*.js --format html:./reports/cucumber_report.html --format json:./reports/cucumber_report.json --format summary --format @cucumber/pretty-formatter --retry 0"
   },
   "keywords": [
     "playwright",
@@ -12,6 +12,7 @@
     "bdd",
     "automation"
   ],
+  
   "author": "",
   "license": "ISC",
   "devDependencies": {

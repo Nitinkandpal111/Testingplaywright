@@ -1,0 +1,22 @@
+{
+  "projectType": "webapp",
+  "commands": [
+    {
+      "name": "test-suite",
+      "command": "run-smoke-tests.cmd",
+      "cwd": ".",
+      "expectExitCode": 0,
+      "timeoutMs": 180000
+    }
+  ],
+  "assertions": [
+    {
+      "name": "tests-pass",
+      "type": "exit-code",
+      "command": "run-smoke-tests.cmd",
+      "cwd": ".",
+      "expected": "0",
+      "timeoutMs": 180000
+    }
+  ]
+}
