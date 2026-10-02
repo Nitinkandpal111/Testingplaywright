@@ -5,9 +5,6 @@ Feature: Login on the Cue website
   Scenario Outline: The user login to the Cue Website and Upload all the files.
     When I redirect to the Cue Website
     Then I login in the Cue Website
-    When I navigate to the "<game>" game
+    When I navigate to the "Shootout" game
     Then I create a new game instance
-
-    Examples:
-      | game     |
-      | Shootout |
+    When I navigate to the Design tab and upload all the files

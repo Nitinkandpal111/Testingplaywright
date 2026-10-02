@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
 const { expect } = require("@playwright/test");
+const { generate } = require("random-words");
 
 class ShootoutPage {
   /**
@@ -7,17 +8,20 @@ class ShootoutPage {
    */
   constructor(page) {
     this.page = page || global.page;
+    //this.gameName = null;
     this.locators = {
       usernameInput: "#P0-0",
       passwordInput: "#P0-1",
       loginButton: "#P0-2",
       gameLink: "text=Shootout",
-      createGameButton: '[data-testid="AddIcon"]',
+      createGameButton: '[aria-label="Add Configuration"]',
+      SaveButton: "//button[(contains(text(),'Save'))]",
+      InputinstanceName: '//input[@name="value"]',
     };
   }
 
   async navigateToLoginScreen(username, password) {
-    const targetUrl = "https://nkandpal.cuelive.com/admin/#/";
+    const targetUrl = "https://nkandpal.stagingdxp.com/admin/#/";
 
     await this.redirectToCueWebsite();
 
@@ -29,7 +33,7 @@ class ShootoutPage {
   }
 
   async redirectToCueWebsite() {
-    const targetUrl = "https://nkandpal.cuelive.com/admin/#/";
+    const targetUrl = "https://nkandpal.stagingdxp.com/admin/#/";
     try {
       await this.page.goto(targetUrl, { waitUntil: "domcontentloaded" });
       await this.page.waitForSelector(this.locators.usernameInput, {
@@ -45,10 +49,9 @@ class ShootoutPage {
 
   async loginToCueWebsite(
     username = process.env.CUE_USERNAME || "nkandpal",
-    password = process.env.CUE_PASSWORD || "I0MjRHzw8h"
+    password = process.env.CUE_PASSWORD || "I0MjRHzw8h",
   ) {
     try {
-      
       await this.page.locator(this.locators.usernameInput).fill(username);
       await this.page.locator(this.locators.passwordInput).fill(password);
       await this.page.locator(this.locators.loginButton).click();
@@ -76,41 +79,100 @@ class ShootoutPage {
       console.log(`Navigated to the "${gameName}" game`);
     } catch (error) {
       throw new Error(
-        `Failed to navigate to game "${gameName}": ${error.message}`
+        `Failed to navigate to game "${gameName}": ${error.message}`,
       );
     }
   }
 
   async createNewGameInstance() {
+    const gameInstanceName = `New Basketball Game ${generate({ minLength: 2, maxLength: 4 })}`;
     try {
-      const frame = await this.page.frameLocator("//iframe[contains(@src,'https://nkandpal.cuelive.com/games/shootout/admin')]")
-      const createButton = await  frame.locator(this.locators.createGameButton);
+      const frame = this.page.frameLocator(
+        "//iframe[contains(@src,'https://nkandpal.stagingdxp.com/games/shootout/admin')]",
+      );
+      const createButton = frame.locator(this.locators.createGameButton);
 
       await createButton.waitFor({ state: "visible", timeout: 30000 });
       await createButton.scrollIntoViewIfNeeded();
       await createButton.click();
       console.log("Clicked on the + button next to Instances");
-       await page.locator('#app iframe').contentFrame().locator('[aria-haspopup="listbox"]').click();
+      await frame.locator('[aria-haspopup="listbox"]').click();
 
-  await page.locator('#app iframe').contentFrame().getByRole('option', { name: 'Basketball' }).click();
-  await page.locator('#app iframe').contentFrame().locator('#P-16999251652').click();
-  await page.locator('#app iframe').contentFrame().locator('#P-16999251652').fill('New Basketball 2');
-  await page.locator('#app iframe').contentFrame().getByRole('button', { name: 'shootout-configurations-add-edit-popup-save-button' }).click();
-  await page.locator('#app iframe').contentFrame().locator('#P-4987285462').click();
-  await page.locator('#app iframe').contentFrame().getByLabel('shootout-basketball-game-').locator('div').nth(4).click();
-  await page.locator('#app iframe').contentFrame().getByRole('button', { name: 'Choose File' }).click();
-  await page.locator('#app iframe').contentFrame().getByRole('button', { name: 'Choose File' }).setInputFiles('signature.png');
-  await page.locator('#app iframe').contentFrame().getByRole('button', { name: 'Aspect Ratio Lock' }).click();
-  await page.locator('#app iframe').contentFrame().getByRole('button', { name: 'Save' }).click();
-  //await expect(page.locator('#app iframe').contentFrame().locator('.MuiBox-root.css-w0xeu4')).toBeVisible();
-
+      await frame
+        .getByRole("option", { name: "Basketball" })
+        .click();
       
+
+      await frame
+        .locator(this.locators.InputinstanceName)
+        .fill(gameInstanceName);
+      await frame
+        .locator(this.locators.SaveButton)
+        .click();
     } catch (error) {
       console.error("createNewGameInstance failed:", error.stack);
       throw new Error(`Failed to create a new game instance: ${error.message}`);
     }
-   
+    return gameInstanceName;
   }
+
+
+  async navigateAndUploadFiles(gameInstanceName) {
+  try {
+    const frame = this.page.frameLocator(
+      "//iframe[contains(@src,'/games/shootout/admin')]"
+    );
+
+    await frame
+      .locator(
+        `//h6[contains(text(),'${gameInstanceName}')]/../../..//button[contains(text(),'Design')]`
+      )
+      .click();
+
+    const filePath = "D:/Test Data/Test Data/Images/Home.webp";
+
+    const images = [
+      "shootout-basketball-game-title-image",
+  "shootout-basketball-team-logo-image",
+  "shootout-basketball-sponsor-logo-image",
+  "shootout-basketball-loading-multi-image",
+  "shootout-basketball-background-image",
+  "shootout-basketball-mobile-leaderboard-background-image",
+  "shootout-basketball-mainboard-background-image",
+  "shootout-basketball-mainboard-1-multi-image",
+  "shootout-basketball-mainboard-2-multi-image",
+  "shootout-basketball-court-key-logo-image",
+  "shootout-basketball-endline-logo-image",
+  "shootout-basketball-partition-image",
+  "shootout-basketball-how-to-play-multi-image",
+  "shootout-basketball-rules-screen-multi-image",
+    ];
+
+    for (const ariaLabel of images) {
+      await this.uploadImage(frame, ariaLabel, filePath);
+    }
+
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+async uploadImage(frame, ariaLabel, filePath) {
+  await frame
+    .locator(`(//div[@aria-label="${ariaLabel}"]//div)[5]`)
+    .click();
+
+  await frame
+    .locator('input[type="file"]')
+    .setInputFiles(filePath);
+
+  console.log(`Uploaded image: ${ariaLabel}`);
+
+  await frame
+    .locator(this.locators.SaveButton)
+    .click();
+}
 }
 
 module.exports = { ShootoutPage };
