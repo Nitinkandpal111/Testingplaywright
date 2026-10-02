@@ -12,7 +12,6 @@
     "bdd",
     "automation"
   ],
-  
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -23,5 +22,8 @@
     "dotenv": "^16.6.1",
     "playwright": "^1.55.0",
     "pretty-format": "^30.0.5"
+  },
+  "dependencies": {
+    "random-words": "^2.0.1"
   }
 }
