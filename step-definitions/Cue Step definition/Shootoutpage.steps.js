@@ -1,6 +1,6 @@
 const { When, Then } = require("@cucumber/cucumber");
 const { ShootoutPage } = require("../../page/Cue Page/ShootoutPage.js");
-let gameInstanceName;
+//let gameInstanceName;
 
 When("I redirect to the Cue Website", async function () {
   const shootoutPage = new ShootoutPage(global.page);

@@ -48,8 +48,8 @@ class ShootoutPage {
   }
 
   async loginToCueWebsite(
-    username = process.env.CUE_USERNAME || "nkandpal",
-    password = process.env.CUE_PASSWORD || "I0MjRHzw8h",
+    username = process.env.CUE_USERNAME,
+    password = process.env.CUE_PASSWORD,
   ) {
     try {
       await this.page.locator(this.locators.usernameInput).fill(username);
@@ -98,17 +98,12 @@ class ShootoutPage {
       console.log("Clicked on the + button next to Instances");
       await frame.locator('[aria-haspopup="listbox"]').click();
 
-      await frame
-        .getByRole("option", { name: "Basketball" })
-        .click();
-      
+      await frame.getByRole("option", { name: "Basketball" }).click();
 
       await frame
         .locator(this.locators.InputinstanceName)
         .fill(gameInstanceName);
-      await frame
-        .locator(this.locators.SaveButton)
-        .click();
+      await frame.locator(this.locators.SaveButton).click();
     } catch (error) {
       console.error("createNewGameInstance failed:", error.stack);
       throw new Error(`Failed to create a new game instance: ${error.message}`);
@@ -116,63 +111,55 @@ class ShootoutPage {
     return gameInstanceName;
   }
 
-
   async navigateAndUploadFiles(gameInstanceName) {
-  try {
-    const frame = this.page.frameLocator(
-      "//iframe[contains(@src,'/games/shootout/admin')]"
-    );
+    try {
+      const frame = this.page.frameLocator(
+        "//iframe[contains(@src,'/games/shootout/admin')]",
+      );
 
-    await frame
-      .locator(
-        `//h6[contains(text(),'${gameInstanceName}')]/../../..//button[contains(text(),'Design')]`
-      )
-      .click();
+      await frame
+        .locator(
+          `//h6[contains(text(),'${gameInstanceName}')]/../../..//button[contains(text(),'Design')]`,
+        )
+        .click();
 
-    const filePath = "D:/Test Data/Test Data/Images/Home.webp";
+      const filePath = "D:/Test Data/Test Data/Images/Home.webp";
 
-    const images = [
-      "shootout-basketball-game-title-image",
-  "shootout-basketball-team-logo-image",
-  "shootout-basketball-sponsor-logo-image",
-  "shootout-basketball-loading-multi-image",
-  "shootout-basketball-background-image",
-  "shootout-basketball-mobile-leaderboard-background-image",
-  "shootout-basketball-mainboard-background-image",
-  "shootout-basketball-mainboard-1-multi-image",
-  "shootout-basketball-mainboard-2-multi-image",
-  "shootout-basketball-court-key-logo-image",
-  "shootout-basketball-endline-logo-image",
-  "shootout-basketball-partition-image",
-  "shootout-basketball-how-to-play-multi-image",
-  "shootout-basketball-rules-screen-multi-image",
-    ];
+      const images = [
+        "shootout-basketball-game-title-image",
+        "shootout-basketball-team-logo-image",
+        "shootout-basketball-sponsor-logo-image",
+        "shootout-basketball-loading-multi-image",
+        "shootout-basketball-background-image",
+        "shootout-basketball-mobile-leaderboard-background-image",
+        "shootout-basketball-mainboard-background-image",
+        "shootout-basketball-mainboard-1-multi-image",
+        "shootout-basketball-mainboard-2-multi-image",
+        "shootout-basketball-court-key-logo-image",
+        "shootout-basketball-endline-logo-image",
+        "shootout-basketball-partition-image",
+        "shootout-basketball-how-to-play-multi-image",
+        "shootout-basketball-rules-screen-multi-image",
+      ];
 
-    for (const ariaLabel of images) {
-      await this.uploadImage(frame, ariaLabel, filePath);
+      for (const ariaLabel of images) {
+        await this.uploadImage(frame, ariaLabel, filePath);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
-
-  } catch (error) {
-    console.error(error);
-    throw error;
   }
-}
 
-async uploadImage(frame, ariaLabel, filePath) {
-  await frame
-    .locator(`(//div[@aria-label="${ariaLabel}"]//div)[5]`)
-    .click();
+  async uploadImage(frame, ariaLabel, filePath) {
+    await frame.locator(`(//div[@aria-label="${ariaLabel}"]//div)[5]`).click();
 
-  await frame
-    .locator('input[type="file"]')
-    .setInputFiles(filePath);
+    await frame.locator('input[type="file"]').setInputFiles(filePath);
 
-  console.log(`Uploaded image: ${ariaLabel}`);
+    console.log(`Uploaded image: ${ariaLabel}`);
 
-  await frame
-    .locator(this.locators.SaveButton)
-    .click();
-}
+    await frame.locator(this.locators.SaveButton).click();
+  }
 }
 
 module.exports = { ShootoutPage };
