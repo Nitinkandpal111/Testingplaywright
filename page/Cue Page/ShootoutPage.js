@@ -1,6 +1,6 @@
-const assert = require("chai").assert;
 const { expect } = require("@playwright/test");
 const { generate } = require("random-words");
+const path = require("path");
 
 class ShootoutPage {
   /**
@@ -18,6 +18,10 @@ class ShootoutPage {
       SaveButton: "//button[(contains(text(),'Save'))]",
       InputinstanceName: '//input[@name="value"]',
     };
+  }
+
+  get shootoutFrame() {
+    return this.page.frameLocator('iframe[src*="/games/shootout/admin"]');
   }
 
   async navigateToLoginScreen(username, password) {
@@ -87,9 +91,8 @@ class ShootoutPage {
   async createNewGameInstance() {
     const gameInstanceName = `New Basketball Game ${generate({ minLength: 2, maxLength: 4 })}`;
     try {
-      const frame = this.page.frameLocator(
-        "//iframe[contains(@src,'https://nkandpal.stagingdxp.com/games/shootout/admin')]",
-      );
+      const frame = this.shootoutFrame;
+
       const createButton = frame.locator(this.locators.createGameButton);
 
       await createButton.waitFor({ state: "visible", timeout: 30000 });
@@ -113,9 +116,7 @@ class ShootoutPage {
 
   async navigateAndUploadFiles(gameInstanceName) {
     try {
-      const frame = this.page.frameLocator(
-        "//iframe[contains(@src,'/games/shootout/admin')]",
-      );
+      const frame = this.shootoutFrame;
 
       await frame
         .locator(
@@ -123,7 +124,13 @@ class ShootoutPage {
         )
         .click();
 
-      const filePath = "D:/Test Data/Test Data/Images/Home.webp";
+      //const filePath = "D:\\Playwrightudittest\\playwrightTest\\TestData\\Home.webp";
+      const filePath = path.resolve(
+            process.cwd(),
+            "TestData",
+            "Home.webp"
+        );
+
 
       const images = [
         "shootout-basketball-game-title-image",

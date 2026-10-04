@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 847583900
+              "duration": 1261083200
             }
           },
           {
@@ -27,7 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 6550483999
+              "duration": 13367888100
             }
           },
           {
@@ -40,7 +40,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 2500247800
+              "duration": 2526548299
             }
           },
           {
@@ -53,7 +53,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 2219012999
+              "duration": 2227318900
             }
           },
           {
@@ -65,9 +65,8 @@
               "location": "step-definitions\\Cue Step definition\\Shootoutpage.steps.js:20"
             },
             "result": {
-              "status": "failed",
-              "duration": 723471300,
-              "error_message": "Error: Failed to create a new game instance: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('//iframe[contains(@src,\\'https://nkandpal.stagingdxp.com/games/shootout/admin\\')]').contentFrame().locator('[aria-label=\"Add Configuration\"]') to be visible\u001b[22m\n\n    at ShootoutPage.createNewGameInstance (D:\\Playwrightudittest\\playwrightTest\\page\\Cue Page\\ShootoutPage.js:109:13)\n    at async World.<anonymous> (D:\\Playwrightudittest\\playwrightTest\\step-definitions\\Cue Step definition\\Shootoutpage.steps.js:22:22)"
+              "status": "passed",
+              "duration": 20490403500
             }
           },
           {
@@ -79,8 +78,8 @@
               "location": "step-definitions\\Cue Step definition\\Shootoutpage.steps.js:25"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 20491474099
             }
           },
           {
@@ -88,7 +87,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 38302499
+              "duration": 210205399
             }
           }
         ],
