@@ -151,6 +151,7 @@ class ShootoutPage {
 
       for (const ariaLabel of images) {
         await this.uploadImage(frame, ariaLabel, filePath);
+        
       }
     } catch (error) {
       console.error(error);
@@ -166,6 +167,22 @@ class ShootoutPage {
     console.log(`Uploaded image: ${ariaLabel}`);
 
     await frame.locator(this.locators.SaveButton).click();
+
+    // Verify that the image was uploaded
+    const uploadedImage = frame.locator(
+        `//div[@aria-label="${ariaLabel}"]//div[@path]`
+    );
+
+    await expect(uploadedImage).toBeVisible({
+        timeout: 10000,
+    });
+
+    // Get the uploaded image path
+    const imagePath = await uploadedImage.getAttribute("path");
+
+    // Verify that the path exists
+    expect(imagePath).toBeTruthy();
+    console.log(`✅ Uploaded and verified: ${ariaLabel}`);
   }
 }
 
